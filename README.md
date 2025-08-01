@@ -89,5 +89,5 @@
 ---
 
 ## 🙋 Обратная связь
-GitHub: @vxlxsco
-Telegram: @themoltisanti
+- GitHub: @themoltisanti
+- Telegram: @themoltisanti
