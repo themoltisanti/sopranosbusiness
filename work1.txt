@@ -1,0 +1,92 @@
+import ccxt
+import requests
+import json
+from telegram import Update
+from telegram.ext import Application, CommandHandler, ContextTypes
+from dotenv import load_dotenv
+import os
+
+# Загружаем переменные окружения
+load_dotenv()
+TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
+
+# Инициализация MEXC через ccxt
+mexc = ccxt.mexc()
+
+# Функция для получения цены с DEX Screener на BSC
+def get_dexscreener_price(token_address, chain='bsc'):
+    try:
+        url = f"https://api.dexscreener.com/latest/dex/tokens/{token_address}?chainIds={chain}"
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+        print(f"Ответ API: {data}")  # Для диагностики
+
+        if not data or 'pairs' not in data or not data.get('pairs'):
+            print("Нет данных о парах для токена.")
+            return None, None, None
+
+        # Приоритизация пар с USDT или USDC как quoteToken
+        for pair in data.get('pairs', []):
+            if pair and 'baseToken' in pair and 'quoteToken' in pair:
+                base_symbol = pair.get('baseToken', {}).get('symbol')
+                quote_symbol = pair.get('quoteToken', {}).get('symbol')
+                print(f"Проверяем пару: base={base_symbol}, quote={quote_symbol}")  # Добавим отладку
+                if base_symbol == 'Broccoli' and quote_symbol in ['USDT', 'USDC'] and 'priceUsd' in pair:
+                    price_usd = float(pair['priceUsd'])
+                    dex_name = pair.get('dexId', 'Unknown DEX')
+                    pair_address = pair.get('pairAddress', '')
+                    print(f"Найдена пара (base с USDT/USDC): {dex_name}, цена: ${price_usd}")
+                    return price_usd, dex_name, pair_address
+        print("Не найдено подходящей пары для BROCCOLIF3B с USDT/USDC.")
+        return None, None, None
+    except requests.exceptions.RequestException as e:
+        print(f"Ошибка сети или API: {e}")
+        return None, None, None
+    except (KeyError, ValueError, TypeError) as e:
+        print(f"Ошибка обработки данных: {e}")
+        return None, None, None
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text('Привет! Я бот для сравнения цен BROCCOLIF3B. Используй /price для получения цен и спреда.')
+
+async def price(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    try:
+        BROCCOLIF3B_ADDRESS = '0x12B4356C65340Fb02cdff01293F95FEBb1512F3b'
+
+        # Получение цены с MEXC
+        mexc_ticker = mexc.fetch_ticker('BROCCOLIF3B/USDT')
+        mexc_price = mexc_ticker['last']
+
+        # Получение цены с DEX Screener (BSC)
+        dex_price, dex_name, pair_address = get_dexscreener_price(BROCCOLIF3B_ADDRESS, chain='bsc')
+
+        if dex_price is None:
+            await update.message.reply_text("Не удалось получить цену с DEX Screener. Проверьте адрес токена или доступность API.")
+            return
+
+        # Расчет спреда
+        spread = abs(mexc_price - dex_price) / min(mexc_price, dex_price) * 100
+
+        # Формирование сообщения
+        message = (
+            f"📊 Цена BROCCOLIF3B:\n"
+            f"MEXC: ${mexc_price:.6f}\n"
+            f"{dex_name} (DEX, BSC): ${dex_price:.6f}\n"
+            f"Спред: {spread:.2f}%\n"
+            f"🔗 Ссылки:\n"
+            f"MEXC: https://www.mexc.com/exchange/BROCCOLIF3B_USDT\n"
+            f"DEX Screener: https://dexscreener.com/bsc/{pair_address}"
+        )
+        await update.message.reply_text(message)
+    except Exception as e:
+        await update.message.reply_text(f"Ошибка: {str(e)}")
+
+def main():
+    application = Application.builder().token(TELEGRAM_TOKEN).build()
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("price", price))
+    application.run_polling()
+
+if __name__ == '__main__':
+    main()

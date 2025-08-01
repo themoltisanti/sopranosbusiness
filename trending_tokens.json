@@ -1,0 +1,218 @@
+[
+  {
+    "symbol": "SOG",
+    "name": "SOLANA GREEN",
+    "address": "FnRUWenpSAexTx1ssa3wvD5twViVJd8R35fKadmTSvL6",
+    "chain": "solana",
+    "price_usd": "0.000005575",
+    "volume_usd": 151.87,
+    "mexc": null
+  },
+  {
+    "symbol": "MOMO",
+    "name": "Momo",
+    "address": "G4zwEA9NSd3nMBbEj31MMPq2853Brx2oGsKzex3ebonk",
+    "chain": "solana",
+    "price_usd": "0.02475",
+    "volume_usd": 1798988.8,
+    "mexc": null
+  },
+  {
+    "symbol": "scarce",
+    "name": "this coin is scarce",
+    "address": "9YJ2XM1KHYDUR3gnMQbEXtWyz7ZXTF1UtPgG8Hu5bonk",
+    "chain": "solana",
+    "price_usd": "0.01633",
+    "volume_usd": 351865.9,
+    "mexc": null
+  },
+  {
+    "symbol": "RAPERODENT",
+    "name": "Origin of Troll Face",
+    "address": "FqrGu7Askk6UcGMvFBB4rPEFSp3X4SrahrbxUFNDbonk",
+    "chain": "solana",
+    "price_usd": "0.00001466",
+    "volume_usd": 120029.64,
+    "mexc": null
+  },
+  {
+    "symbol": "FINE",
+    "name": "This is Fine",
+    "address": "FG2BATCst1kGj63avozHvbtdysPgLEq4bnQKjPfe9gag",
+    "chain": "solana",
+    "price_usd": "0.0002077",
+    "volume_usd": 2642112.81,
+    "mexc": null
+  },
+  {
+    "symbol": "BULLPEPE",
+    "name": "Bull Pepe",
+    "address": "0x1FdcfdEc6fE7A8956bd5b6c4a8C3791aE0A19065",
+    "chain": "base",
+    "price_usd": "0.00004154",
+    "volume_usd": 55230.98,
+    "mexc": null
+  },
+  {
+    "symbol": "RickRoll",
+    "name": "Rick Roll",
+    "address": "WbKhUr1ZZfmcjwmonVjc12UxfdH8c5jgmWZoXmAmoon",
+    "chain": "solana",
+    "price_usd": "0.00002710",
+    "volume_usd": 563517.56,
+    "mexc": null
+  },
+  {
+    "symbol": "Trollina",
+    "name": "Trollina",
+    "address": "QHURmnHRmREjM1wsCrMdSccuAeGayg1MWrHm5rtro11",
+    "chain": "solana",
+    "price_usd": "0.000001581",
+    "volume_usd": 22395.65,
+    "mexc": null
+  },
+  {
+    "symbol": "BOA",
+    "name": "Bonk Of America",
+    "address": "CGntzrcAnapUsZVa93cwwTm6gLhDMdV95xLnrbHQbonk",
+    "chain": "solana",
+    "price_usd": "0.00002544",
+    "volume_usd": 541857.24,
+    "mexc": null
+  },
+  {
+    "symbol": "wif",
+    "name": "dogwifhat",
+    "address": "3DVWqxmwWqvkunc2edKMbdf4f9a3HvakCurACsvJbonk",
+    "chain": "solana",
+    "price_usd": "0.000009208",
+    "volume_usd": 17125.98,
+    "mexc": null
+  },
+  {
+    "symbol": "TROLLHOUSE",
+    "name": "Troll House",
+    "address": "492JGSNiNd3DvWtnej1raJwNQ6Qui1W2UaGtVUCPpump",
+    "chain": "solana",
+    "price_usd": "0.0001961",
+    "volume_usd": 1382312.99,
+    "mexc": null
+  },
+  {
+    "symbol": "TROLLHOUSE",
+    "name": "Troll House",
+    "address": "492JGSNiNd3DvWtnej1raJwNQ6Qui1W2UaGtVUCPpump",
+    "chain": "solana",
+    "price_usd": "0.0001961",
+    "volume_usd": 1382312.99,
+    "mexc": null
+  },
+  {
+    "symbol": "RAPERODENT",
+    "name": "Origin of Troll Face",
+    "address": "FqrGu7Askk6UcGMvFBB4rPEFSp3X4SrahrbxUFNDbonk",
+    "chain": "solana",
+    "price_usd": "0.00001466",
+    "volume_usd": 120029.64,
+    "mexc": null
+  },
+  {
+    "symbol": "VINE",
+    "name": "Based Vine Coin",
+    "address": "0x0b8D26A97D7871Cea34AE15757164454624ED196",
+    "chain": "base",
+    "price_usd": "0.0001452",
+    "volume_usd": 46451.39,
+    "mexc": null
+  },
+  {
+    "symbol": "molang",
+    "name": "molang",
+    "address": "9GCjrfLyH8DoogPmodPQtqHxaYSLyAQtvUumJFSCbonk",
+    "chain": "solana",
+    "price_usd": "0.0004446",
+    "volume_usd": 154447.14,
+    "mexc": null
+  },
+  {
+    "symbol": "GRU",
+    "name": "Grumpy Days",
+    "address": "3vYiKSQAb31xyr6wNCGYuVNAAueuTMWBkoa9jKJJhzH8",
+    "chain": "solana",
+    "price_usd": "0.00001053",
+    "volume_usd": 2415.85,
+    "mexc": null
+  },
+  {
+    "symbol": "BUTTONS",
+    "name": "Two Buttons",
+    "address": "9DNPBiHKzsWdXA6J1pFSGT2AkntYQrtD8civovUp9gag",
+    "chain": "solana",
+    "price_usd": "0.00001475",
+    "volume_usd": 116734.52,
+    "mexc": null
+  },
+  {
+    "symbol": "AiM",
+    "name": "Ape In Mask",
+    "address": "BYAXYeuC1r4QeHwcDKsiD7Gtz9aK37yPR4jR1yCcpump",
+    "chain": "solana",
+    "price_usd": "0.00001779",
+    "volume_usd": 28575.84,
+    "mexc": null
+  },
+  {
+    "symbol": "DINO",
+    "name": "Dino Dog",
+    "address": "8TmfXohXnfWYQ63c9Tn1kWnFxdZmZpkcm5AQ3JmV9gag",
+    "chain": "solana",
+    "price_usd": "0.00001281",
+    "volume_usd": 55836.75,
+    "mexc": null
+  },
+  {
+    "symbol": "Moon",
+    "name": "MILLIONS out of NOTHING",
+    "address": "HfyaWppH5o5Hu7EwvMknmqXYAHoCcjtQGA9zyFttpump",
+    "chain": "solana",
+    "price_usd": "0.00001492",
+    "volume_usd": 13199.23,
+    "mexc": null
+  },
+  {
+    "symbol": "CVNTY",
+    "name": "CVNTY",
+    "address": "Fdi2E9F9p3MgqkmXn7Wz6RTixtmys1Weo2S3QVYVKvWA",
+    "chain": "solana",
+    "price_usd": "0.00006683",
+    "volume_usd": 92.56,
+    "mexc": null
+  },
+  {
+    "symbol": "RAPERODENT",
+    "name": "Origin of Troll Face",
+    "address": "FqrGu7Askk6UcGMvFBB4rPEFSp3X4SrahrbxUFNDbonk",
+    "chain": "solana",
+    "price_usd": "0.00001466",
+    "volume_usd": 120029.64,
+    "mexc": null
+  },
+  {
+    "symbol": "Moon",
+    "name": "MILLIONS out of NOTHING",
+    "address": "HfyaWppH5o5Hu7EwvMknmqXYAHoCcjtQGA9zyFttpump",
+    "chain": "solana",
+    "price_usd": "0.00001492",
+    "volume_usd": 13199.23,
+    "mexc": null
+  },
+  {
+    "symbol": "WASSIE",
+    "name": "Everything is Wassie",
+    "address": "w1nf7GjwCDNwn4ZsUqPr4a4omu6Zc3boKd83Cpfpump",
+    "chain": "solana",
+    "price_usd": "0.000005351",
+    "volume_usd": 1439004.08,
+    "mexc": null
+  }
+]

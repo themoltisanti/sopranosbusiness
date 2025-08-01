@@ -1,0 +1,107 @@
+import requests
+import json
+
+DEX_BASE = "https://api.dexscreener.com"
+BOOSTS_TOP = f"{DEX_BASE}/token-boosts/latest/v1"
+PAIRS_BY_TOKEN = f"{DEX_BASE}/tokens/v1/{{chainId}}/{{pairId}}"
+MEXC_API = "https://www.mexc.com/open/api/v2/market/ticker"
+CHAINS = ["solana", "bsc", "base", "sui"]
+OUTPUT = "trending_tokens.json"
+
+def fetch_boosts():
+    r = requests.get(BOOSTS_TOP)
+    r.raise_for_status()
+    data = r.json()
+    if not isinstance(data, list):
+        raise ValueError("❌ boost response должен быть списком")
+    return data
+
+def fetch_pair_details(chain_id, token_address):
+    url = PAIRS_BY_TOKEN.format(chainId=chain_id, pairId=token_address)
+    r = requests.get(url)
+    r.raise_for_status()
+    data = r.json()
+
+    # Поддержка формата list или dict
+    if isinstance(data, list):
+        for item in data:
+            if isinstance(item, dict) and "baseToken" in item:
+                return item
+    elif isinstance(data, dict):
+        pairs = data.get("pairs", [])
+        if isinstance(pairs, list):
+            for p in pairs:
+                if isinstance(p, dict) and "baseToken" in p:
+                    return p
+    return None
+
+def mexc_listed_exact(symbol):
+    try:
+        r = requests.get(MEXC_API)
+        r.raise_for_status()
+        tickers = r.json().get("data", [])
+        for t in tickers:
+            if t["symbol"].upper() == symbol.upper():
+                return True, t["symbol"]
+    except Exception as e:
+        print(f"⚠️ Ошибка при запросе к MEXC: {e}")
+    return False, None
+
+def main():
+    try:
+        boosts = fetch_boosts()
+        result = []
+        print(f"🚀 Получено {len(boosts)} токенов с boost’ами")
+
+        for item in boosts:
+            chain = item.get("chainId")
+            addr = item.get("tokenAddress")
+            if not chain or not addr or chain not in CHAINS:
+                continue
+
+            try:
+                pair = fetch_pair_details(chain, addr)
+                if not pair:
+                    print(f"⚠️ Нет пары для {addr} [{chain}]")
+                    continue
+
+                base = pair.get("baseToken", {})
+                symbol = base.get("symbol", "N/A")
+                name = base.get("name", "N/A")
+                price = pair.get("priceUsd", "N/A")
+                volume = float(pair.get("volume", {}).get("h24", 0))
+
+                print(f"\n🔎 Проверка токена {symbol} ({name}) на сети {chain}")
+                print(f"📦 Адрес: {addr}")
+                print(f"💲 Цена: ${price} | Объём 24ч: ${volume:,.2f}")
+
+                listed, mexc_symbol = mexc_listed_exact(symbol)
+
+                if listed:
+                    print(f"✅ Найден ТОЧНО на MEXC: {mexc_symbol}")
+                else:
+                    print("❌ Не найден точно на MEXC")
+
+                result.append({
+                    "symbol": symbol,
+                    "name": name,
+                    "address": addr,
+                    "chain": chain,
+                    "price_usd": price,
+                    "volume_usd": volume,
+                    "mexc": mexc_symbol if listed else None
+                })
+
+            except Exception as e:
+                print(f"⚠️ Ошибка при обработке токена {addr}: {e}")
+                continue
+
+        with open(OUTPUT, "w", encoding="utf-8") as f:
+            json.dump(result, f, indent=2, ensure_ascii=False)
+        print(f"\n💾 Сохранено {len(result)} токенов в {OUTPUT}")
+
+    except Exception as e:
+        print(f"\n❌ Ошибка выполнения: {e}")
+
+if __name__ == "__main__":
+    main()
