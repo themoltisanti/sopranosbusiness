@@ -85,3 +85,9 @@
   Спред: 5.96%
  🔗 DEX Screener: https://dexscreener.com/bsc/0x123...
 ```
+
+---
+
+## 🙋 Обратная связь
+GitHub: @vxlxsco
+Telegram: @themoltisanti
