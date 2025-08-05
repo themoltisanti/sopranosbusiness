@@ -20,7 +20,7 @@
 ## 📦 Установка
 1. Клонируй репозиторий:
    ```bash
-   git clone https://github.com/themoltisanti/sopranosbusiness
+   git clone https://github.com/themoltisanti/sopranosbusiness.git
    cd sopranosbusiness
    ```
 2. Установи зависимости:
