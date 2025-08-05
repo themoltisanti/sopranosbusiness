@@ -9,10 +9,11 @@ from typing import List, Tuple
 
 # Загружаем переменные окружения
 load_dotenv()
-TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
+TOKEN_BOT_ID = os.getenv('TOKEN_BOT_ID')
 CHAT_ID = os.getenv('CHAT_ID')
 if not CHAT_ID:
     raise ValueError("CHAT_ID не указан в .env. Укажи CHAT_ID чата, где работает бот.")
+
 
 # Чтение токенов из tokens.json
 def load_tokens():
@@ -124,6 +125,7 @@ def check_spread_logic(tokens):
                 f"  {dex_n} (DEX): ${dex_p:.6f}\n"
                 f"  Спред: {spr:.2f}%\n"
                 f"  🔗 DEX Screener: https://dexscreener.com/{chain}/{pair_a}\n"
+                f"  🔗 MEXC: https://www.mexc.com/ru-RU/exchange/{symbol}_USDT\n\n"
             )
         return message
     return "Нет токенов с спредом > 5%."
@@ -138,7 +140,7 @@ async def check(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Ошибка: Не удалось загрузить токены.")
         return
     message = check_spread_logic(tokens)
-    await update.message.reply_text(message)
+    await update.message.reply_text(message, disable_web_page_preview=True)
 
 async def auto_check_spread(context: ContextTypes.DEFAULT_TYPE):
     tokens = load_tokens()
@@ -146,10 +148,10 @@ async def auto_check_spread(context: ContextTypes.DEFAULT_TYPE):
         print("Нет токенов для автоматической проверки.")
         return
     message = check_spread_logic(tokens)
-    await context.bot.send_message(chat_id=CHAT_ID, text=message)
+    await context.bot.send_message(chat_id=CHAT_ID, text=message, disable_web_page_preview=True)
 
 def main():
-    application = Application.builder().token(TELEGRAM_TOKEN).build()
+    application = Application.builder().token(TOKEN_BOT_ID).build()
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("check", check))
     application.run_polling()
