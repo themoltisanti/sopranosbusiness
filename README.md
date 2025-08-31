@@ -1,40 +1,43 @@
 # 💼💵 Soprano Business Bot
 
-Этот бот отслеживает цены токенов на биржах [DEXScreener](https://dexscreener.com) и [MEXC](https://www.mexc.com), определяет разницу между ними (спред) и уведомляет, если спред превышает 5%.
+This bot tracks token prices on [DEXScreener](https://dexscreener.com) and [MEXC](https://www.mexc.com), calculates the difference between them (spread), and notifies you if the spread exceeds 5%.
 
-Полезен для:
-- 💱 Арбитража
-- 📈 Мониторинга рыночной неэффективности
-- 🔍 Анализа ликвидности
+Useful for:
+- 💱 Arbitrage
+- 📈 Monitoring market inefficiencies
+- 🔍 Liquidity analysis
 
-## 🛠 Возможности
+## 🛠 Features
 
-- Получает цены токенов с DEX и MEXC
-- Вычисляет процентное различие между ними
-- Отправляет алерт в Telegram, если спред > 5%
-- Автоматическая проверка каждые 5 минут
-- Команда `/check` для ручного запроса
+- Fetches token prices from DEX and MEXC
+- Calculates the percentage difference between them
+- Sends a Telegram alert if the spread > 5%
+- Automatic check every 5 minutes
+- `/check` command for manual price check
 
 ---
 
-## 📦 Установка
-1. Клонируй репозиторий:
+## 📦 Installation
+1. Clone the repository:
    ```bash
    git clone https://github.com/themoltisanti/sopranosbusiness.git
    cd sopranosbusiness
-   ```
-2. Установи зависимости:
+```
+
+2. Install dependencies:
+
    ```bash
    pip install -r requirements.txt
    ```
-3. Создай файл `.env` и настрой:
+3. Create a `.env` file and configure:
 
    ```env
    TELEGRAM_TOKEN=your_telegram_bot_token
    CHAT_ID=your_chat_id
    ```
-4. Создай файл `tokens.json` в корне проекта, например:
-   ```bash
+4. Create a `tokens.json` file in the project root, for example:
+
+   ```json
    [
      {"symbol": "CAKE", "address": "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82", "chain": "bsc"},
      {"symbol": "SHIB", "address": "0x2859e4544c4bb03966803b044a93563bd2d0dd4d", "chain": "bsc"},
@@ -44,46 +47,53 @@
      {"symbol": "HOSICO", "address": "9wK8yN6iz1ie5kEJkvZCTxyN1x5sTdNfx8yeMY8Ebonk", "chain": "solana"}
    ]
    ```
-5. Запусти бота:
+5. Run the bot:
+
    ```bash
    python arbitrage.py
    ```
-   
----
-
-## 🧠 Как это работает
-
-- Загружает токены из tokens.json
-- Получает цену с MEXC (через API /ticker/price)
-- Получает цену с DEXScreener по сети и адресу токена
-- Вычисляет спред:
-  `spread = |price_mexc - price_dex| / min(price_mexc, price_dex) * 100`
-- Если спред > 5% — отправляет сообщение в Telegram.
-  
----
-
-## 💬 Доступные команды
-| Команда  | Описание                                                   |
-| -------- | ---------------------------------------------------------- |
-| `/start` | Запускает автоматическую проверку каждые 5 минут           |
-| `/check` | Делает ручную проверку токенов и отправляет текущие спреды |
-
-(В будущем будет больше команд, некоторые будут переработаны)
 
 ---
 
-## 📎 Примеры уведомлений
+## 🧠 How it works
+
+* Loads tokens from `tokens.json`
+* Fetches price from MEXC (via API `/ticker/price`)
+* Fetches price from DEXScreener using network and token address
+* Calculates spread:
+
+  ```text
+  spread = |price_mexc - price_dex| / min(price_mexc, price_dex) * 100
+  ```
+* If spread > 5% — sends a Telegram message.
+
+---
+
+## 💬 Available commands
+
+| Command  | Description                                             |
+| -------- | ------------------------------------------------------- |
+| `/start` | Starts automatic price checking every 5 minutes         |
+| `/check` | Performs a manual token check and sends current spreads |
+
+(Future updates will add more commands and features)
+
+---
+
+## 📎 Example Notifications
+
 ```
-⚠️ Токены с спредом > 5%:
+⚠️ Tokens with spread > 5%:
 - CAKE (BSC):
   MEXC: $2.310000
   PancakeSwap (DEX): $2.180000
-  Спред: 5.96%
+  Spread: 5.96%
  🔗 DEX Screener: https://dexscreener.com/bsc/0x123...
 ```
 
 ---
 
-## 🙋 Обратная связь
-- GitHub: @themoltisanti
-- Telegram: @themoltisanti
+## 🙋 Feedback
+
+* GitHub: @themoltisanti
+* Telegram: @themoltisanti
