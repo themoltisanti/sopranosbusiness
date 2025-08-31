@@ -26,7 +26,7 @@ Useful for:
 
 2. Install dependencies:
 
-   ```bash
+   ```
    pip install -r requirements.txt
    ```
 3. Create a `.env` file and configure:
