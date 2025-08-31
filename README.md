@@ -19,7 +19,7 @@ Useful for:
 
 ## 📦 Installation
 1. Clone the repository:
-   ```bash
+   ```
    git clone https://github.com/themoltisanti/sopranosbusiness.git
    cd sopranosbusiness
 ```
