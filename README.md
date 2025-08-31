@@ -22,11 +22,11 @@ Useful for:
    ```
    git clone https://github.com/themoltisanti/sopranosbusiness.git
    cd sopranosbusiness
-```
+   ```
 
 2. Install dependencies:
 
-   ```
+   ```env
    pip install -r requirements.txt
    ```
 3. Create a `.env` file and configure:
